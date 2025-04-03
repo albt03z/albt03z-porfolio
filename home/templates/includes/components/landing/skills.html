@@ -1,0 +1,36 @@
+{% load static %}
+
+<section class="skills-author-section sp1" id="habilidades">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 m-auto">
+                <div class="others-header text-center heading-1 space-margin60">
+                    <h5>Mis Habilidades <i class="fa-solid fa-angle-right"></i></h5>
+                    <div class="space16"></div>
+                    <h2>Conocimientos y Tecnologías</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="space24"></div>
+
+        <div class="row">
+            <div class="col-lg-10 m-auto">
+                <div class="row">
+                    {% comment %} Habilidades podrían cargarse desde una base de datos {% endcomment %}
+                    <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-duration="800">
+                        <div class="others-boxarea">
+                            <img src="{% static 'images/icons/companys/agc-companys-1.png' %}" alt="Python">
+                        </div>
+                    </div>
+                    
+                    <!-- Repetir el mismo patrón para todas las habilidades -->
+                    {% with 'companys/agc-companys-'|add:123456789101112 as image_path %}
+                    <!-- Ejemplo de implementación dinámica posible -->
+                    {% endwith %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
