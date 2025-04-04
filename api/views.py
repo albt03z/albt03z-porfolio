@@ -5,8 +5,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth.models import User
 from rest_framework import viewsets, permissions
-from .serializers import UserSerializer, CountrySerializer, RegionSerializer, CitySerializer, CountryInfoSerializer
-from .models import Countries, Region, City, CountryInfo
+from .serializers import UserSerializer, CountriesSerializer, StatesSerializer, CitiesSerializer, CountriesInfoSerializer
+from .models import Countries, States, Cities, CountriesInfo, Continents, CitiesInfo
 
 # Create your views here.
 class ProtectedView(APIView):
@@ -24,34 +24,34 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-class CountryViewSet(viewsets.ModelViewSet):
+class CountriesViewSet(viewsets.ModelViewSet):
     """
     Este viewset provee métodos GET, POST, PUT, DELETE para el modelo Country.
     """
     queryset = Countries.objects.all()
-    serializer_class = CountrySerializer
+    serializer_class = CountriesSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-class CountryInfoViewSet(viewsets.ModelViewSet):
+class CountriesInfoViewSet(viewsets.ModelViewSet):
     """
     Este viewset provee métodos GET, POST, PUT, DELETE para el modelo CountryInfo.
     """
-    queryset = CountryInfo.objects.all()
-    serializer_class = CountryInfoSerializer
+    queryset = CountriesInfo.objects.all()
+    serializer_class = CountriesInfoSerializer
     permission_classes = [permissions.IsAuthenticated]   
 
-class RegionViewSet(viewsets.ModelViewSet):
+class StatesViewSet(viewsets.ModelViewSet):
     """
     Este viewset provee métodos GET, POST, PUT, DELETE para el modelo Region.
     """
-    queryset = Region.objects.all()
-    serializer_class = RegionSerializer
+    queryset = States.objects.all()
+    serializer_class = StatesSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-class CityViewSet(viewsets.ModelViewSet):
+class CitiesViewSet(viewsets.ModelViewSet):
     """
     Este viewset provee métodos GET, POST, PUT, DELETE para el modelo City.
     """
-    queryset = City.objects.all()
-    serializer_class = CitySerializer
+    queryset = Cities.objects.all()
+    serializer_class = CitiesSerializer
     permission_classes = [permissions.IsAuthenticated]
