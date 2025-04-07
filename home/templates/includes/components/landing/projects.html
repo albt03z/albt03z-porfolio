@@ -1,0 +1,59 @@
+{% load static %}
+
+<section class="projects-section-area sp1" id="proyectos">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 m-auto">
+                <div class="project-header heading-1 text-center space-margin60">
+                    <h5>Portafolio <i class="fa-solid fa-angle-right"></i></h5>
+                    <div class="space16"></div>
+                    <h2 class="text-anime-style-3">Proyectos Destacados</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="space24"></div>
+
+        <div class="row">
+            {% comment %} Estos proyectos podrían dinamizarse con datos desde views.py {% endcomment %}
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="800">
+                <div class="project-boxarea">
+                    <div class="img1">
+                        <img src="{% static 'images/heros/agc-project-1.png' %}" alt="Marketplace de Agricultura Inteligente">
+                    </div>
+                    <div class="text-area">
+                        <a href="#">Marketplace de Agricultura Inteligente</a>
+                        <div class="space8"></div>
+                        <p>Innovación en el sector agroexportador</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="900">
+                <div class="project-boxarea">
+                    <div class="img1">
+                        <img src="{% static 'images/heros/agc-project-3.png' %}" alt="ERP en la Nube para PyMEs">
+                    </div>
+                    <div class="text-area">
+                        <a href="#">ERP en la Nube para PyMEs</a>
+                        <div class="space8"></div>
+                        <p>Solución integral para la gestión empresarial</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="project-boxarea">
+                    <div class="img1">
+                        <img src="{% static 'images/heros/agc-project-2.png' %}" alt="ETL y Análisis de Datos">
+                    </div>
+                    <div class="text-area">
+                        <a href="#">ETL y Análisis de Datos</a>
+                        <div class="space8"></div>
+                        <p>Procesos optimizados con Spark y Pandas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

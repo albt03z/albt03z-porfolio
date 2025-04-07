@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--Meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--Title-->
+        <title>Adalberto González Cuesta | Ingeniero de Software y Desarrollador</title>
+
+        <!--SEO Meta description-->
+        <meta name="description" 
+        content="Portafolio de Adalberto González Cuesta, ingeniero de software especializado en desarrollo web, análisis de datos e integración de soluciones tecnológicas.">
+        <meta name="keywords" content="Adalberto González Cuesta, ingeniero de software, desarrollo web, análisis de datos, tecnología, portafolio">
+        <meta name="author" content="Adalberto González Cuesta">
+
+        <!--Favicon-->
+        <link rel="apple-touch-icon" href="{% static 'images/logos/apple-touch-icon.png' %}" sizes="180x180">
+        <link rel="icon" type="image/png" href="{% static 'images/logos/favicon-32x32.png' %}" sizes="32x32">
+        <link rel="icon" type="image/png" href="{% static 'images/logos/favicon-16x16.png' %}" sizes="16x16">
+        <link rel="manifest" href="{% static 'images/logos/site.webmanifest' %}">
+        <link rel="shortcut icon" href="{% static 'images/logos/favicon.ico' %}">
+
+        <!--Styles CSS-->
+        {% include 'includes/layouts/stylesheets.html' %}
+    </head>
+    <body>
+        <main>
+            <!-- Header -->
+            {% include 'includes/components/menu/menu.html' %}
+            {% block content %}
+            {% endblock %}
+            <!-- Footer -->
+            {% include 'includes/components/footer/footer.html' %}
+        </main>
+        <!--Scripts JS-->
+        {% include 'includes/layouts/scripts.html' %}
+    </body>
+</html>
