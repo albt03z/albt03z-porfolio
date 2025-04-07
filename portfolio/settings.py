@@ -88,22 +88,14 @@ REST_FRAMEWORK = {
 ### TESTING ###
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'portfolio',
+        'USER': 'root',
+        'PASSWORD': 'Agc3103.',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
-
-### TESTING - PRODUCTION ###
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'portfolio',
-#        'USER': 'root',
-#        'PASSWORD': 'Agc3103.',
-#        'HOST': 'localhost',
-#        'PORT': '3306',
-#    }
-#}
 
 
 # Password validation

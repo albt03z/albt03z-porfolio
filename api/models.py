@@ -91,7 +91,7 @@ class Countries(models.Model):
     def __str__(self):
         return f"{self.common_name} ({self.alpha_2_code})"
     
-class CountriesInfo(models.Model):
+class Countries_Info(models.Model):
     country = models.OneToOneField(
         Countries,
         on_delete=models.CASCADE,
@@ -114,7 +114,7 @@ class CountriesInfo(models.Model):
         help_text='URL de la bandera en formato SVG'
     )
     calling_code = models.CharField(
-        max_length=5,
+        max_length=10,
         blank=True,
         validators=[RegexValidator(r'^\+\d{1,4}$')],
         help_text='Código telefónico internacional'
@@ -148,11 +148,11 @@ class States(models.Model):
         related_name='states'
     )
     code = models.CharField(
-        max_length=6,
+        max_length=20,
         validators=[RegexValidator(r'^[A-Z]{2}-[A-Z0-9]{1,4}$')],
         help_text='Código ISO 3166-2'
     )
-    official_name = models.CharField(
+    name = models.CharField(
         max_length=100,
         validators=[MinLengthValidator(2)],
         help_text='Nombre oficial'
@@ -170,100 +170,31 @@ class States(models.Model):
         verbose_name = 'División Administrativa'
         verbose_name_plural = 'Divisiones Administrativas'
         unique_together = [['country', 'code']]
-        ordering = ['country', 'official_name']
+        ordering = ['country', 'name']
 
     def __str__(self):
-        return f"{self.official_name}, {self.country.alpha_2_code}"
+        return f"{self.name}, {self.country.alpha_2_code}"
 
     def save(self, *args, **kwargs):
         if not self.code.startswith(f"{self.country.alpha_2_code}-"):
             self.code = f"{self.country.alpha_2_code}-{self.code.split('-')[-1]}"
         super().save(*args, **kwargs)
 
-class Cities(models.Model):
-    state = models.ForeignKey(
-        States,
-        on_delete=models.CASCADE,
-        related_name='cities',
-        null=True,
-        blank=True
-    )
-    country = models.ForeignKey(
-        Countries,
-        on_delete=models.CASCADE,
-        related_name='cities'
-    )
-    official_name = models.CharField(
+
+class Types_Document(models.Model):
+    id_type = models.CharField(verbose_name = 'Código del tipo de documento', max_length=2, primary_key=True)
+    name = models.CharField(
         max_length=100,
         validators=[MinLengthValidator(2)],
-        help_text='Nombre oficial'
+        help_text='Nombre del tipo de documento'
     )
-    is_capital = models.BooleanField(
-        default=False,
-        help_text='Capital del país'
-    )
-    is_state_capital = models.BooleanField(
-        default=False,
-        help_text='Capital administrativa'
-    )
-    is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = 'Ciudad'
-        verbose_name_plural = 'Ciudades'
-        unique_together = [['state', 'official_name']]
-        ordering = ['official_name']
-        
-    def __str__(self):
-        return f"{self.official_name}, {self.country.alpha_2_code}"
-
-    def save(self, *args, **kwargs):
-        if self.state and self.state.country != self.country:
-            self.country = self.state.country
-        super().save(*args, **kwargs)
-
-class CitiesInfo(models.Model):
-    city = models.OneToOneField(
-        Cities,
-        on_delete=models.CASCADE,
-        related_name='geo_info',
-        primary_key=True
-    )
-    latitude = models.DecimalField(
-        max_digits=9,
-        decimal_places=6,
-        help_text='Coordenada de latitud'
-    )
-    longitude = models.DecimalField(
-        max_digits=9,
-        decimal_places=6,
-        help_text='Coordenada de longitud'
-    )
-    population = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-        help_text='Población estimada'
-    )
-    elevation = models.IntegerField(
-        null=True,
-        blank=True,
-        help_text='Altitud en metros'
-    )
-    timezone = models.CharField(
-        max_length=50,
-        help_text='Zona horaria'
-    )
-    last_census = models.DateField(
-        null=True,
-        blank=True,
-        help_text='Fecha del último censo'
-    )
-
-    class Meta:
-        verbose_name = 'Información Geográfica de Ciudad'
-        verbose_name_plural = 'Informaciones Geográficas de Ciudades'
+        verbose_name = 'Tipo de Documento'
+        verbose_name_plural = 'Tipos de Documentos'
+        ordering = ['name']
 
     def __str__(self):
-        return f"Datos de {self.city.official_name}"
+        return self.name

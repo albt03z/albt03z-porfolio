@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Countries, States, Cities, CountriesInfo, Continents, CitiesInfo
+from .models import Countries, States, Countries_Info, Continents, Types_Document
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -9,31 +9,18 @@ class UserSerializer(serializers.ModelSerializer):
 
 class CountriesInfoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CountriesInfo
-        fields = '__all__'
-
-class CitiesInfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CitiesInfo
-        fields = '__all__'
-
-class CitiesSerializer(serializers.ModelSerializer):
-    info = CitiesInfoSerializer(read_only=True)
-
-    class Meta:
-        model = Cities
+        model = Countries_Info
         fields = '__all__'
 
 class StatesSerializer(serializers.ModelSerializer):
-    cities = CitiesSerializer(many=True, read_only=True)
 
     class Meta:
         model = States
         fields = '__all__'
 
 class CountriesSerializer(serializers.ModelSerializer):
+    states = StatesSerializer(many=True, read_only=True)
     info = CountriesInfoSerializer(read_only=True)
-    regions = StatesSerializer(many=True, read_only=True)
     
     class Meta:
         model = Countries
@@ -44,4 +31,9 @@ class ContinentsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Continents
+        fields = '__all__'
+
+class TypesDocumentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Types_Document
         fields = '__all__'
